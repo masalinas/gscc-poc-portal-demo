@@ -10,7 +10,7 @@
   Portal Vertical Menu
   <ul>
     <li *ngFor="let module of modules" >
-      <a [routerLink]="module" routerLinkActive="active">{{ module }} Module</a>      
+      <a [routerLink]="module" routerLinkActive="active">{{ module | uppercase }} Module</a>      
     </li>
   </ul>    
 </nav>
