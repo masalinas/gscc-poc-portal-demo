@@ -1,25 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, Router, RouterModule } from '@angular/router';
+
 import { environment } from '../environments/environment';
 
-const routes: Routes = [
+let routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./modules/dashboard/src/dashboard.module').then(m => m.DashboardModule) },
-  { path: 'gsbi', loadChildren: () => import('./modules/gsbi/src/gsbi.module').then(m => m.MainModule) },
-  { path: 'gspl', loadChildren: () => import('./modules/gspl/src/gspl.module').then(m => m.GsplModule) },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {   
+export class AppRoutingModule {
   constructor(
     private router: Router,
   ) {
-    environment.modules.forEach(function(module) {
-        //console.log(module);
-        routes.push({ path: module, loadChildren: () => import('./modules/gsbi/src/gsbi.module').then(m => m.MainModule) });        
+    environment.modules.forEach(function(module) {                    
+        routes.push({ path: module, loadChildren: () => import(`./modules/${module}/src/${module}.module`).then(m => m.MainModule) });
+        
+        /*if (module == 'gsbi')
+          routes.push({ path: module, loadChildren: () => import('./modules/gsbi/src/gsbi.module').then(m => m.MainModule) });
+
+        if (module == 'gspl')
+          routes.push({ path: module, loadChildren: () => import('./modules/gspl/src/gspl.module').then(m => m.MainModule) });*/
       }
     );
+
+    this.router.resetConfig(routes);
   }
 }

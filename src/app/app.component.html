@@ -1,13 +1,18 @@
 <h1>GSCC Base Portal</h1>
 
-<!-- Module Menu -->
-Portal Menu
+<!-- Portal Menu -->
 <nav>
+  Portal Core Menu
   <ul>
       <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard Module</a></li>
-      <li><a routerLink="/gsbi" routerLinkActive="active">GSBI Module (Lazy Load)</a></li>
-      <li><a routerLink="/gspl" routerLinkActive="active">GSPL Module (Lazy Load)</a></li>
   </ul>
+
+  Portal Vertical Menu
+  <ul>
+    <li *ngFor="let module of modules" >
+      <a [routerLink]="module" routerLinkActive="active">{{ module }} Module</a>      
+    </li>
+  </ul>    
 </nav>
 
 <!-- Module Container-->
